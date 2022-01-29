@@ -25,27 +25,34 @@ public class MainActivity extends AppCompatActivity {
 
             //Should we handle if the user wrote usd amount in the lbp place and vice-versa?
 
-            //if the user enters an amount in the USD and doesnt enter an amount in lbp we should convert usd to lbp
+            //I did not handle the case if the user did not write a number since I already specified that it is a float text in layout
+
+            //if the user enters an amount in the USD and does not enter an amount in lbp we should convert usd to lbp
             if((input_lbp).matches("")&& !((input_usd).matches(""))){
                 converted_amount = usdConverter(Float.parseFloat(input_usd));
+                lbp_amount.setText(Float.toString(converted_amount));
             }
             else if(!((input_lbp).matches(""))&& (input_usd).matches("")){
                 //if the user does not enter an amount in the USD but enters an amount in lbp we should convert lbp to usd
                 converted_amount = lbpConverter(Float.parseFloat(input_lbp));
+                usd_amount.setText(Float.toString(converted_amount));
             }
             else if(!((input_lbp).matches("")) && !((input_usd).matches(""))){
-                Toast toast2 = Toast.makeText(getApplicationContext(),"Specify only one field please",Toast.LENGTH_LONG);
-                toast2.show();
+                // user specifies both fields
+                Toast toast = Toast.makeText(getApplicationContext(),"Please specify only one field",Toast.LENGTH_LONG);
+                toast.show();
             }
-            //If the user does not write in any, it will display the amount is 0.0
-            String message = "The amount is "+ converted_amount ;
-            Toast toast = Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG);
-            toast.show();
+            else{ //user does not specify any field
+                Toast toast1 = Toast.makeText(getApplicationContext(),"Please specify at least one field",Toast.LENGTH_LONG);
+                toast1.show();
+            }
         }
         public float usdConverter(float usd){
-         return usd* 22000;
+        //converts usd to lbp on 22000 rate
+        return usd* 22000;
         }
         public float lbpConverter(float lbp){
+        //converts lbp to usd on 22000 rate
         return lbp/22000;
         }
 }
