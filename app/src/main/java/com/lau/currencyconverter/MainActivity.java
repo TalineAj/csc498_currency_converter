@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
             String input_usd = usd_amount.getText().toString();
             String input_lbp = lbp_amount.getText().toString();
 
-            //Should we handle if the user wrote usd amount in the lbp place and vice-versa?
 
             //I did not handle the case if the user did not write a number since I already specified that it is a float text in layout
 
